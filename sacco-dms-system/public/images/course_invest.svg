@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice">
+  <rect width="400" height="160" fill="#2F5D45"/>
+  <g fill="#F3E4B8"><rect x="90" y="100" width="40" height="40"/><rect x="150" y="80" width="40" height="60"/><rect x="210" y="58" width="40" height="82"/></g>
+  <rect x="270" y="30" width="40" height="110" fill="#C9972B"/>
+  <path d="M85 80 L160 55 L225 38 L300 16" fill="none" stroke="#E1E8DA" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 10"/>
+</svg>

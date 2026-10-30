@@ -1,0 +1,140 @@
+/* No external font imports — every font below ships with the OS, so this page never makes a network request. */
+
+:root {
+  --forest:#173B2C; --forest-light:#2F5D45; --forest-pale:#E1E8DA;
+  --gold:#C9972B; --gold-pale:#F3E4B8; --paper:#F1EFE3;
+  --ink:#1B1F19; --ink-soft:#5B6154; --rust:#B1502E; --line:#DBD8C8; --white:#FFFFFF;
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin:0; font-family:var(--font-body); color:var(--ink); background:var(--paper); }
+
+/* ---- landing / welcome / sign-in (shared "flow" screens) ---- */
+.flow-screen {
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:var(--forest); color:var(--white); text-align:center; gap:6px; padding:24px;
+}
+.flow-mark { font-family:var(--font-display); font-size:30px; font-weight:600; max-width:520px; }
+.flow-tag { color:#C7D4C4; margin-bottom:26px; font-size:14px; max-width:420px; }
+.pillar-list { list-style:none; padding:0; margin:0 0 10px; text-align:left; max-width:420px; }
+.pillar-list li {
+  font-size:13.5px; color:#DCE6D8; padding:8px 0 8px 22px; border-bottom:1px solid #2A4B39;
+  position:relative;
+}
+.pillar-list li::before { content:"✓"; position:absolute; left:0; color:var(--gold); font-weight:700; }
+.pillar-list li:last-child { border-bottom:none; }
+.login-form { display:flex; flex-direction:column; width:280px; }
+.login-label { font-size:12px; color:#C7D4C4; margin-bottom:6px; text-align:left; }
+.login-input { padding:10px 12px; border-radius:7px; border:1px solid #4B6B58; background:#1F4634; color:var(--white); font-size:14px; }
+.lock-hint { margin-top:16px; font-size:13px; color:#F3E4B8; min-height:18px; }
+.flow-link { background:none; border:none; color:var(--gold-pale); font-size:13px; text-decoration:underline; cursor:pointer; margin-top:14px; }
+.lock-alt { margin-top:40px; font-size:12.5px; color:#9AAE93; max-width:420px;}
+.lock-alt strong { color:var(--gold-pale); }
+
+/* ---- shell ---- */
+.shell { display:flex; min-height:100vh; }
+.sidebar { width:220px; background:var(--forest); color:#DCE6D8; padding:22px 14px; flex-shrink:0; }
+.brand { font-family:var(--font-display); font-size:19px; font-weight:600; color:var(--white); padding:0 8px 22px; }
+.nav-item {
+  display:flex; align-items:center; gap:10px; padding:9px 10px; border-radius:8px; font-size:13.5px;
+  cursor:pointer; margin-bottom:2px; color:#C6D3C1; background:transparent; border:none; width:100%; text-align:left;
+}
+.nav-item:hover { background:#1F4A37; color:var(--white); }
+.nav-item-active { background:var(--forest-light); color:var(--white); font-weight:500; }
+
+.main { flex:1; padding:26px 34px; max-width:900px; }
+.header-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:18px; }
+.greeting { font-family:var(--font-display); font-size:22px; font-weight:600; }
+.sector-badge { font-size:12px; background:var(--forest-pale); color:var(--forest); padding:4px 10px; border-radius:20px; }
+
+.grid-2 { display:grid; grid-template-columns:1.3fr 1fr; gap:16px; margin-bottom:16px; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:16px; }
+@media (max-width:760px) { .grid-2,.grid-3 { grid-template-columns:1fr; } .sidebar{width:64px;} .brand,.nav-label{display:none;} .main{padding:20px;} }
+
+.card { background:var(--white); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin-bottom:16px; }
+.card-title { font-size:14.5px; font-weight:600; margin:0 0 4px; }
+.card-sub { font-size:12.5px; color:var(--ink-soft); margin:0 0 10px; }
+
+.balance-card { background:linear-gradient(160deg, var(--forest) 0%, #1F4A37 100%); color:var(--white); border:none; }
+.balance-card .card-sub { color:#B9CBB3; }
+.balance { font-family:var(--font-display); font-size:32px; font-weight:600; margin-bottom:10px; }
+
+.btn-gold { background:var(--gold); color:var(--ink); border:none; padding:9px 16px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; }
+.btn-outline { background:transparent; border:1px solid var(--line); color:var(--forest); padding:8px 14px; border-radius:7px; font-size:13px; cursor:pointer; }
+.btn-small { padding:6px 12px; font-size:12px; }
+
+.chip-row { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.chip { display:flex; align-items:center; gap:6px; border:1px solid var(--line); background:var(--white); padding:7px 13px; border-radius:20px; font-size:12.5px; cursor:pointer; }
+.chip-active { background:var(--forest); color:var(--white); border-color:var(--forest); }
+
+.list-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:13.5px; }
+.list-row:last-child { border-bottom:none; }
+.list-row-meta { color:var(--ink-soft); font-size:12.5px; }
+
+.form-inline { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+.form-inline input, .form-inline select { padding:8px 10px; border-radius:7px; border:1px solid var(--line); font-size:13px; font-family:inherit; }
+
+.course-bar { height:6px; background:var(--forest-pale); border-radius:4px; overflow:hidden; margin:8px 0; }
+.course-fill { height:100%; background:var(--gold); }
+
+.badge-ok { color:var(--forest); font-weight:600; }
+.badge-warn { color:var(--rust); font-weight:600; }
+
+.audit-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-top:10px; }
+.audit-table th { text-align:left; color:var(--ink-soft); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line); }
+.audit-table td { padding:8px; border-bottom:1px solid var(--line); }
+
+.error-banner { background:#FBE7E0; color:var(--rust); border:1px solid #EBC2B0; padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:14px; }
+.empty { color:var(--ink-soft); font-size:13px; padding:10px 0; }
+
+/* ---- images ---- */
+#landing-screen {
+  background: linear-gradient(rgba(16,41,31,0.35), rgba(16,41,31,0.55)), url('/images/landing.svg') center / cover no-repeat;
+}
+#welcome-screen, #login-screen, #register-screen {
+  background: linear-gradient(rgba(16,41,31,0.82), rgba(16,41,31,0.88)), url('/images/landing.svg') center / cover no-repeat;
+}
+.loan-banner { float:left; width:300px; height:130px; border-radius:8px; margin:0 20px 12px 0; background:center / cover no-repeat; }
+.card:has(> .loan-banner) { display:flow-root; }
+@media (max-width:760px) { .loan-banner { float:none; width:100%; height:auto; aspect-ratio:600 / 260; margin-right:0; } }
+.row-main { display:flex; align-items:center; gap:14px; }
+.thumb { width:76px; height:56px; border-radius:6px; flex-shrink:0; background:center / cover no-repeat; border:1px solid var(--line); }
+.course-thumb { height:84px; border-radius:6px; margin-bottom:12px; background:center / cover no-repeat; }
+/* ---- button hover effects ---- */
+button {
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease,
+              transform .12s ease, box-shadow .18s ease;
+}
+
+/* gold buttons (Get started, Sign in, Deposit, Apply...): darker gold, lift slightly */
+.btn-gold:hover {
+  background: #B3841F;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(23, 59, 44, .25);
+}
+
+/* outline buttons (Download, Buy, Generate report...): fill with green */
+.btn-outline:hover {
+  background: var(--forest);
+  color: var(--white);
+  border-color: var(--forest);
+}
+
+/* small text links (Register, Sign in link) */
+.flow-link:hover { color: var(--white); }
+
+/* the filter chips */
+.chip:hover { background: var(--forest-pale); border-color: var(--forest-light); }
+.chip-active:hover { background: var(--forest-light); color: var(--white); }
+
+/* pressing a button feels responsive */
+.btn-gold:active, .btn-outline:active { transform: translateY(0); box-shadow: none; }
+
+/* keyboard users get the same feedback when tabbing to a button */
+.btn-gold:focus-visible, .btn-outline:focus-visible,
+.flow-link:focus-visible, .chip:focus-visible, .nav-item:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}

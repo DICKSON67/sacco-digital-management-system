@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SACCO Digital Management System</title>
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <!-- 1. LANDING -->
+  <section id="landing-screen" class="flow-screen">
+    <div class="flow-mark">SACCO Digital Management System</div>
+    <p class="flow-tag">Save together. Grow together.</p>
+    <button id="landing-cta" class="btn-gold" style="margin-top:10px;">Get started</button>
+  </section>
+
+  <!-- 2. WELCOME -->
+  <section id="welcome-screen" class="flow-screen" style="display:none;">
+    <div class="flow-mark" style="font-size:22px;">Welcome to SACCO Digital Management System</div>
+    <p class="flow-tag">One platform for everything your SACCO membership covers:</p>
+    <ul class="pillar-list">
+      <li>24/7 digital access — app, web, USSD and WhatsApp</li>
+      <li>Loan products tailored to your sector</li>
+      <li>SASRA-compliant, fully audited transactions</li>
+      <li>Investment options beyond savings — real estate, T-bills, agri-funds</li>
+      <li>Financial literacy tools and coaching</li>
+      <li>Partner discounts on insurance, retail and remittances</li>
+    </ul>
+    <button id="welcome-cta" class="btn-gold" style="margin-top:16px;">Continue to sign in</button>
+  </section>
+
+  <!-- 3. SIGN IN -->
+  <section id="login-screen" class="flow-screen" style="display:none;">
+    <div class="flow-mark" style="font-size:22px;">Sign in</div>
+    <form id="login-form" class="login-form">
+      <label class="login-label" for="email-input">Email</label>
+      <input id="email-input" class="login-input" type="email" placeholder="you@example.com" autocomplete="username" />
+      <label class="login-label" for="password-input" style="margin-top:12px;">Password</label>
+      <input id="password-input" class="login-input" type="password" placeholder="••••••••" autocomplete="current-password" />
+      <button type="submit" class="btn-gold" style="width:100%;margin-top:16px;">Sign in</button>
+    </form>
+    <p class="lock-hint" id="login-status"></p>
+    <button id="goto-register" class="flow-link">New member? Register</button>
+  </section>
+
+  <!-- 3b. REGISTER -->
+  <section id="register-screen" class="flow-screen" style="display:none;">
+    <div class="flow-mark" style="font-size:22px;">Register as a new member</div>
+    <form id="register-form" class="login-form">
+      <label class="login-label" for="reg-name">Full name</label>
+      <input id="reg-name" class="login-input" type="text" placeholder="Jane Wanjiru" required />
+
+      <label class="login-label" for="reg-email" style="margin-top:12px;">Email</label>
+      <input id="reg-email" class="login-input" type="email" placeholder="jane@example.com" required />
+
+      <label class="login-label" for="reg-password" style="margin-top:12px;">Password</label>
+      <input id="reg-password" class="login-input" type="password" placeholder="At least 8 characters" required />
+
+      <label class="login-label" for="reg-sector" style="margin-top:12px;">Sector</label>
+      <select id="reg-sector" class="login-input">
+        <option value="teacher">Teacher</option>
+        <option value="nurse">Nurse</option>
+        <option value="farmer">Farmer</option>
+        <option value="trader">Trader</option>
+        <option value="other">Other</option>
+      </select>
+
+      <button type="submit" class="btn-gold" style="width:100%;margin-top:16px;">Create account</button>
+    </form>
+    <p class="lock-hint" id="register-status"></p>
+    <button id="goto-login" class="flow-link">Already a member? Sign in</button>
+  </section>
+
+  <!-- 4. DASHBOARD -->
+  <section id="app-shell" class="shell" style="display:none;">
+    <div class="sidebar">
+      <div class="brand">SACCO DMS</div>
+      <nav id="nav-list"></nav>
+      <button id="logout-btn" class="nav-item" style="margin-top:20px;">Log out</button>
+    </div>
+    <div class="main">
+      <div class="header-row">
+        <div class="greeting" id="greeting"></div>
+        <div class="sector-badge" id="sector-badge"></div>
+      </div>
+      <div id="view-content"></div>
+    </div>
+  </section>
+
+  <script src="/app.js"></script>
+</body>
+</html>

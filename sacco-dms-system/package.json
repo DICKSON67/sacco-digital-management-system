@@ -1,0 +1,16 @@
+{
+  "name": "sacco-digital-management-system",
+  "version": "1.0.0",
+  "description": "SACCO Digital Management System: web application and API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^3.0.3"
+  }
+}

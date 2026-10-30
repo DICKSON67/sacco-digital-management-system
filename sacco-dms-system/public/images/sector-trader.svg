@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#173B2C"/><stop offset="1" stop-color="#2F5D45"/></linearGradient>
+    <pattern id="stripes" width="80" height="60" patternUnits="userSpaceOnUse"><rect width="40" height="60" fill="#C9972B"/><rect x="40" width="40" height="60" fill="#F3E4B8"/></pattern>
+  </defs>
+  <rect width="600" height="260" fill="url(#g)"/>
+  <path d="M110 60 H490 L520 120 H80Z" fill="url(#stripes)"/>
+  <g fill="#C9972B"><circle cx="110" cy="122" r="12"/><circle cx="190" cy="122" r="12"/><circle cx="270" cy="122" r="12"/><circle cx="350" cy="122" r="12"/><circle cx="430" cy="122" r="12"/><circle cx="510" cy="122" r="12"/></g>
+  <rect x="115" y="120" width="8" height="100" fill="#E1E8DA"/><rect x="477" y="120" width="8" height="100" fill="#E1E8DA"/>
+  <rect x="100" y="185" width="400" height="40" rx="6" fill="#10291F"/>
+  <rect x="140" y="150" width="70" height="35" fill="#B1502E"/><rect x="230" y="150" width="70" height="35" fill="#C9972B"/><rect x="320" y="150" width="70" height="35" fill="#E1E8DA"/>
+</svg>

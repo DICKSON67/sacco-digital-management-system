@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" preserveAspectRatio="xMidYMid slice">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F5D45"/><stop offset="1" stop-color="#C9972B" stop-opacity="0.5"/></linearGradient></defs>
+  <rect width="600" height="260" fill="url(#g)"/>
+  <circle cx="470" cy="85" r="46" fill="#F3E4B8"/>
+  <path d="M0 150 C150 120 300 160 600 130 L600 260 L0 260Z" fill="#173B2C"/>
+  <g stroke="#2F5D45" stroke-width="6" fill="none" stroke-linecap="round">
+    <path d="M-20 260 L190 160"/><path d="M60 260 L230 160"/><path d="M150 260 L270 160"/><path d="M250 260 L320 160"/><path d="M360 260 L380 160"/><path d="M470 260 L430 160"/><path d="M580 260 L480 160"/>
+  </g>
+  <g fill="#C9972B"><ellipse cx="190" cy="120" rx="10" ry="22"/><ellipse cx="270" cy="118" rx="10" ry="22"/><ellipse cx="350" cy="116" rx="10" ry="22"/></g>
+  <g stroke="#E1E8DA" stroke-width="5" stroke-linecap="round"><line x1="190" y1="142" x2="190" y2="165"/><line x1="270" y1="140" x2="270" y2="165"/><line x1="350" y1="138" x2="350" y2="165"/></g>
+</svg>
