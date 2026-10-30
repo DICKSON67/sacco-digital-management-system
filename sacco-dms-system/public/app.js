@@ -25,12 +25,29 @@ document.getElementById("welcome-cta").addEventListener("click", () => show("log
 document.getElementById("goto-register").addEventListener("click", () => show("register-screen"));
 document.getElementById("goto-login").addEventListener("click", () => show("login-screen"));
 
+const API_BASE = "https://sacco-dms-backend.onrender.com";
+
 async function api(path, opts = {}) {
-  const headers = { "Content-Type": "application/json" };
-  if (state.token) headers["Authorization"] = `Bearer ${state.token}`;
-  const res = await fetch(path, { ...opts, headers });
+  const headers = {
+    "Content-Type": "application/json",
+    ...(opts.headers || {}),
+  };
+
+  if (state.token) {
+    headers["Authorization"] = `Bearer ${state.token}`;
+  }
+
+  const res = await fetch(`${API_BASE}${path}`, {
+    ...opts,
+    headers,
+  });
+
   const body = await res.json().catch(() => ({}));
-  if (!res.ok) throw { status: res.status, ...body };
+
+  if (!res.ok) {
+    throw { status: res.status, ...body };
+  }
+
   return body;
 }
 
@@ -450,7 +467,7 @@ async function renderCompliance(el) {
   // save dialog manually.
   document.querySelectorAll(".download-report").forEach((btn) => {
     btn.addEventListener("click", async () => {
-      const res = await fetch(`/compliance/sasra-reports/${btn.dataset.id}/download`, {
+      const res = await fetch(`${API_BASE}/compliance/sasra-reports/${btn.dataset.id}/download`, {
         headers: { Authorization: `Bearer ${state.token}` },
       });
       if (!res.ok) return;
