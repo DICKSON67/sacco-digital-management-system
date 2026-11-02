@@ -8,6 +8,8 @@ const allRoutes = [
   ...require("./learning"),
   ...require("./partners"),
   ...require("./compliance"),
+  ...require("./officer"),
+  ...require("./admin"),
 ];
 
 function toSegments(pathname) {
