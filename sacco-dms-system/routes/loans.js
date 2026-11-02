@@ -15,6 +15,9 @@ module.exports = [
     method: "POST",
     pattern: "/loans/apply",
     handler: (req) => {
+      if (req.actor.kyc_status !== "verified") {
+        return { status: 403, body: { error: `Your membership is ${req.actor.kyc_status}. An officer must approve it before you can apply for a loan.` } };
+      }
       const { product_id, amount, tenure_months } = req.body || {};
       const product = loanProducts.get(product_id);
       if (!product) return { status: 404, body: { error: "Unknown product_id" } };
@@ -37,6 +40,17 @@ module.exports = [
       };
       loans.set(loan.id, loan);
       return { status: 201, body: { loan } };
+    },
+  },
+  {
+    method: "GET",
+    pattern: "/loans/me",
+    handler: (req) => {
+      const mine = [...loans.values()]
+        .filter((l) => l.member_id === req.actor.id)
+        .map((l) => ({ ...l, product_name: (loanProducts.get(l.product_id) || {}).name || l.product_id }))
+        .sort((a, b) => String(b.applied_at).localeCompare(String(a.applied_at)));
+      return { status: 200, body: { loans: mine }, audit: false };
     },
   },
   {
