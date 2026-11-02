@@ -17,9 +17,8 @@ const members = new Map([
     {
       id: "mem_achieng",
       full_name: "J. Achieng",
-      email: "achieng@saccodms.co.ke",
-      // Demo password. It is hashed when the store loads (see below) and is
-      // never kept or saved as plain text.
+      email: "achieng@gmail.com",
+      phone: "254712121212",
       password: "Teacher@123",
       sector: "teacher",
       kyc_status: "verified",
@@ -31,11 +30,25 @@ const members = new Map([
     {
       id: "mem_mwangi",
       full_name: "P. Mwangi",
-      email: "mwangi@saccodms.co.ke",
+      email: "mwangi@gmail,com",
+      phone: "254707070707",
       password: "Officer@123",
       sector: "other",
       kyc_status: "verified",
-      role: "officer", // compliance officer — can see SASRA ratios & audit log
+      role: "officer", 
+    },
+  ],
+  [
+    "mem_admin",
+    {
+      id: "mem_admin",
+      full_name: "System Administrator",
+      email: "admin@gmail.com",
+      phone: "254712000003",
+      password: "Admin@12345", 
+      sector: "other",
+      kyc_status: "verified",
+      role: "admin", 
     },
   ],
 ]);
@@ -76,10 +89,22 @@ const dividendHistory = [
 const memberSettings = new Map([["mem_achieng", { reinvest: true }]]);
 
 const courses = new Map([
-  ["course_debt", { id: "course_debt", title: "How to manage debt", duration_minutes: 18 }],
-  ["course_invest", { id: "course_invest", title: "Introduction to investing", duration_minutes: 25 }],
-  ["course_interest", { id: "course_interest", title: "Understanding interest rates", duration_minutes: 12 }],
+  ["course_debt", { id: "course_debt", title: "How to manage debt", duration_minutes: 18,
+    description: "Learn how to borrow wisely, avoid over-borrowing and clear debt faster.",
+    content: "1. Borrow only what you can repay. A common rule of thumb is that loan repayments should not take more than one third of your monthly income.\n2. Compare the full cost of a loan: the interest rate, any fees and the repayment period, not only the monthly instalment.\n3. List every debt, then clear the one with the highest interest first while paying the minimum on the others.\n4. Keep some emergency savings so that a sudden expense does not push you into a new loan.",
+    link: "" }],
+  ["course_invest", { id: "course_invest", title: "Introduction to investing", duration_minutes: 25,
+    description: "Understand risk, return and the difference between saving and investing.",
+    content: "1. Saving keeps your money safe and ready to use. Investing puts money to work to earn more over time, but with more risk.\n2. Higher expected returns usually come with higher risk. Never invest money you may need soon.\n3. Spread your money across different investments so that one poor result does not cost you everything.\n4. Start small, keep learning, and check that an investment is licensed or regulated before you put money in.",
+    link: "" }],
+  ["course_interest", { id: "course_interest", title: "Understanding interest rates", duration_minutes: 12,
+    description: "See how interest is calculated and how rates change what you pay and earn.",
+    content: "1. Interest is the price of using money. Borrowers pay it and savers earn it.\n2. Simple interest is charged on the original amount only. Compound interest is charged on the amount plus the interest already added, so it grows faster.\n3. A loan quoted at a flat rate and one quoted on a reducing balance cost different amounts. Always ask which one applies.\n4. Compare offers over the same period, for example the yearly rate, before you decide.",
+    link: "" }],
 ]);
+
+// Business events added by the system administrator: { id, title, date (YYYY-MM-DD), time, location, description }
+const events = new Map();
 
 const courseProgress = new Map([
   ["mem_achieng:course_debt", { member_id: "mem_achieng", course_id: "course_debt", percent_complete: 100 }],
@@ -111,7 +136,7 @@ for (const m of members.values()) {
 // Everything a member can change is saved. Session tokens are not: members
 // simply sign in again after a restart.
 const DB_FILE = process.env.DB_FILE || path.join(__dirname, "db.json");
-const MAPS = { members, accounts, loans, holdings, memberSettings, courseProgress };
+const MAPS = { members, accounts, loans, holdings, memberSettings, courseProgress, courses, events };
 const ARRAYS = { transactions, auditLog, sasraReports };
 
 function save() {
@@ -148,11 +173,23 @@ function load() {
   }
 }
 
-if (load()) console.log("Loaded saved data from " + DB_FILE);
+// Demo accounts added in a newer version of the code (for example the administrator)
+// are inserted if a saved file does not have them yet. Existing accounts are never
+// overwritten, except that a missing phone number is filled in.
+const SEED_MEMBERS = [...members.entries()].map(([k, v]) => [k, { ...v }]);
+
+if (load()) {
+  console.log("Loaded saved data from " + DB_FILE);
+  for (const [id, seed] of SEED_MEMBERS) {
+    const existing = members.get(id);
+    if (!existing) members.set(id, seed);
+    else if (!existing.phone && seed.phone) existing.phone = seed.phone;
+  }
+}
 
 module.exports = {
   nextId, save,
   members, accounts, transactions, loanProducts, loans,
   investmentProducts, holdings, dividendHistory, memberSettings,
-  courses, courseProgress, partners, auditLog, sasraSnapshot, sasraReports, tokens,
+  courses, events, courseProgress, partners, auditLog, sasraSnapshot, sasraReports, tokens,
 };
