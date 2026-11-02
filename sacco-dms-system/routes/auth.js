@@ -36,7 +36,7 @@ module.exports = [
         status: 200,
         body: {
           token,
-          member: { id: member.id, full_name: member.full_name, email: member.email, sector: member.sector, role: member.role },
+          member: { id: member.id, full_name: member.full_name, email: member.email, sector: member.sector, role: member.role, kyc_status: member.kyc_status, phone: member.phone || null },
         },
       };
     },
@@ -48,8 +48,12 @@ module.exports = [
     handler: (req) => {
       const { full_name, email, password, sector, phone } = req.body || {};
 
-      if (!full_name || !email || !password || !sector) {
-        return { status: 400, body: { error: "full_name, email, password and sector are required" } };
+      if (!full_name || !email || !password || !sector || !phone) {
+        return { status: 400, body: { error: "full_name, email, phone, password and sector are required" } };
+      }
+      const cleanPhone = String(phone).replace(/[\s\-()]/g, "");
+      if (!/^\+?[0-9]{9,15}$/.test(cleanPhone)) {
+        return { status: 400, body: { error: "phone must be a valid number, for example 0712345678 or +254712345678" } };
       }
       if (!VALID_SECTORS.includes(sector)) {
         return { status: 400, body: { error: `sector must be one of: ${VALID_SECTORS.join(", ")}` } };
@@ -71,11 +75,12 @@ module.exports = [
         email,
         // Only a salted hash is stored, never the password itself.
         password: hashPassword(password),
-        phone: phone || null,
+        phone: cleanPhone,
         sector,
         // A real system would not verify KYC at signup — it queues Huduma/AML
         // checks (architecture doc §3.6) before the account is fully active.
         kyc_status: "pending",
+        created_at: new Date().toISOString(),
         role: "member",
       };
       members.set(memberId, member);
@@ -90,7 +95,7 @@ module.exports = [
         status: 201,
         body: {
           token,
-          member: { id: member.id, full_name: member.full_name, email: member.email, sector: member.sector, role: member.role },
+          member: { id: member.id, full_name: member.full_name, email: member.email, sector: member.sector, role: member.role, kyc_status: member.kyc_status, phone: member.phone || null },
         },
       };
     },
