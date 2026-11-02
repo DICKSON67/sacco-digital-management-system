@@ -102,39 +102,64 @@ body { margin:0; font-family:var(--font-body); color:var(--ink); background:var(
 .row-main { display:flex; align-items:center; gap:14px; }
 .thumb { width:76px; height:56px; border-radius:6px; flex-shrink:0; background:center / cover no-repeat; border:1px solid var(--line); }
 .course-thumb { height:84px; border-radius:6px; margin-bottom:12px; background:center / cover no-repeat; }
+
+/* ---- approvals ---- */
+.table-wrap { overflow-x:auto; }
+.table-wrap .audit-table td { vertical-align:middle; }
+.table-wrap .btn-small { margin:2px 4px 2px 0; }
+.pill { display:inline-block; padding:2px 9px; border-radius:10px; font-size:11.5px; font-weight:600; white-space:nowrap; }
+.pill-wait { background:var(--gold-pale); color:#7A5A12; }
+.pill-ok   { background:var(--forest-pale); color:var(--forest); }
+.pill-bad  { background:#F6DDD3; color:var(--rust); }
+.notice { background:var(--gold-pale); color:#6B4E0F; border:1px solid #E3CE8C; border-radius:8px; padding:11px 14px; font-size:13px; margin-bottom:14px; }
+
+/* ---- my details (overview) ---- */
+.details { margin:0; }
+.details-row { display:flex; justify-content:space-between; gap:16px; padding:10px 0; border-bottom:1px solid var(--line); font-size:14px; }
+.details-row:last-child { border-bottom:none; }
+.details dt { color:var(--ink-soft); }
+.details dd { margin:0; font-weight:500; text-align:right; word-break:break-word; }
+
+/* ---- learning: thick progress circles ---- */
+.ring-text { fill:var(--ink); font-family:var(--font-display); font-weight:600; }
+.ring-bar { animation: ring-draw .9s ease-out; }
+@keyframes ring-draw { from { stroke-dashoffset: var(--ring-c); } }
+.learn-summary { display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+.section-title { font-size:15px; font-weight:600; margin:22px 0 10px; }
+.course-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:16px; margin-bottom:6px; }
+.course-card { margin-bottom:0; display:flex; flex-direction:column; }
+.course-card .course-thumb { height:110px; margin-bottom:12px; }
+.course-head { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:6px; }
+.course-head .course-name { margin-bottom:2px; }
+.course-actions { display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; padding-top:10px; }
+.lesson { margin:2px 0 8px; font-size:13px; }
+.lesson summary { cursor:pointer; color:var(--forest); font-weight:600; padding:4px 0; }
+.lesson summary:hover { text-decoration:underline; }
+.lesson-body { color:var(--ink); line-height:1.55; margin:6px 0; }
+.lesson-body a { color:var(--forest); }
+.event-row { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); }
+.event-row:last-child { border-bottom:none; }
+.event-date { flex:0 0 52px; height:56px; border-radius:8px; background:var(--forest); color:var(--white); display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.event-day { font-family:var(--font-display); font-size:20px; font-weight:600; line-height:1; }
+.event-month { font-size:11px; text-transform:uppercase; letter-spacing:.5px; margin-top:3px; color:var(--gold-pale); }
+.event-title { font-weight:600; font-size:14px; }
+
+/* ---- administration forms ---- */
+.admin-form { display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; }
+.admin-form label { display:flex; flex-direction:column; gap:5px; font-size:12.5px; color:var(--ink-soft); }
+.admin-form .wide { grid-column:1 / -1; }
+.admin-form input, .admin-form textarea { padding:8px 10px; border:1px solid var(--line); border-radius:7px; font:inherit; font-size:13.5px; color:var(--ink); background:var(--white); width:100%; }
+.admin-form input:focus, .admin-form textarea:focus { outline:2px solid var(--forest-light); outline-offset:0; border-color:var(--forest-light); }
+.form-status { font-size:13px; color:var(--rust); margin-left:10px; }
+.notice-ok { background:var(--forest-pale); color:var(--forest); border-color:#C3D1BB; }
+@media (max-width:760px) { .admin-form { grid-template-columns:1fr; } }
+
 /* ---- button hover effects ---- */
-button {
-  transition: background-color .18s ease, color .18s ease, border-color .18s ease,
-              transform .12s ease, box-shadow .18s ease;
-}
-
-/* gold buttons (Get started, Sign in, Deposit, Apply...): darker gold, lift slightly */
-.btn-gold:hover {
-  background: #B3841F;
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(23, 59, 44, .25);
-}
-
-/* outline buttons (Download, Buy, Generate report...): fill with green */
-.btn-outline:hover {
-  background: var(--forest);
-  color: var(--white);
-  border-color: var(--forest);
-}
-
-/* small text links (Register, Sign in link) */
-.flow-link:hover { color: var(--white); }
-
-/* the filter chips */
-.chip:hover { background: var(--forest-pale); border-color: var(--forest-light); }
-.chip-active:hover { background: var(--forest-light); color: var(--white); }
-
-/* pressing a button feels responsive */
-.btn-gold:active, .btn-outline:active { transform: translateY(0); box-shadow: none; }
-
-/* keyboard users get the same feedback when tabbing to a button */
-.btn-gold:focus-visible, .btn-outline:focus-visible,
-.flow-link:focus-visible, .chip:focus-visible, .nav-item:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-}
+button { transition: background-color .18s ease, color .18s ease, border-color .18s ease, transform .12s ease, box-shadow .18s ease; }
+.btn-gold:hover { background:#B3841F; transform:translateY(-1px); box-shadow:0 3px 8px rgba(23,59,44,.25); }
+.btn-outline:hover { background:var(--forest); color:var(--white); border-color:var(--forest); }
+.flow-link:hover { color:var(--white); }
+.chip:hover { background:var(--forest-pale); border-color:var(--forest-light); }
+.chip-active:hover { background:var(--forest-light); color:var(--white); }
+.btn-gold:active, .btn-outline:active { transform:translateY(0); box-shadow:none; }
+.btn-gold:focus-visible, .btn-outline:focus-visible, .flow-link:focus-visible, .chip:focus-visible, .nav-item:focus-visible, .lesson summary:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
