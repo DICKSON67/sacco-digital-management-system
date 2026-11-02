@@ -1,4 +1,11 @@
-const { courses, courseProgress } = require("../data/store");
+const { courses, courseProgress, events } = require("../data/store");
+
+// "YYYY-MM-DD" for today in the server's own time zone
+function today() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
 
 module.exports = [
   {
@@ -25,6 +32,17 @@ module.exports = [
       const key = `${req.actor.id}:${course.id}`;
       courseProgress.set(key, { member_id: req.actor.id, course_id: course.id, percent_complete: percent });
       return { status: 200, body: { progress: courseProgress.get(key) } };
+    },
+  },
+  {
+    // Upcoming business events (today and later), soonest first
+    method: "GET",
+    pattern: "/learning/events",
+    handler: () => {
+      const upcoming = [...events.values()]
+        .filter((e) => e.date >= today())
+        .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
+      return { status: 200, body: { events: upcoming }, audit: false };
     },
   },
 ];
